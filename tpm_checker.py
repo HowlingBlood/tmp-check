@@ -11,10 +11,7 @@ import subprocess
 
 
 def get_tpm_status():
-    """使用命令行检查 TPM 状态。"""
     try:
-        # 运行 tpm.msc 命令并检查输出，虽然tpm.msc是图形界面，但其wmi信息可以被subprocess查询
-        # 这里我们使用 powershell 的 Get-Tpm cmdlet 来获取更可靠的信息
         result = subprocess.run(
             ["powershell.exe", "Get-Tpm"],
             capture_output=True,
@@ -23,7 +20,6 @@ def get_tpm_status():
             encoding="utf-8"
         )
         if "True" in result.stdout:
-            # 简化判断，如果 powershell 返回的 Enabled 或 Present 字段为 True
             return "开启"
         else:
             return "未开启"
@@ -33,9 +29,7 @@ def get_tpm_status():
 
 
 def get_secure_boot_status():
-    """使用命令行检查 Secure Boot 状态。"""
     try:
-        # 使用 powershell 的 Confirm-SecureBootUEFI cmdlet 来获取信息
         result = subprocess.run(
             ["powershell.exe", "Confirm-SecureBootUEFI"],
             capture_output=True,
@@ -75,7 +69,6 @@ class TPMCheckerApp(QWidget):
         self.setLayout(main_layout)
 
     def check_status(self):
-        # 异步调用并更新状态，确保界面不卡顿
         tpm_status = get_tpm_status()
         secure_boot_status = get_secure_boot_status()
 
