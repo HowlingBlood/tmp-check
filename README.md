@@ -1,6 +1,10 @@
 ## 简易TPM和安全启动检测器
 使用方法：下载文件，以管理员身份启动
 
+如显示未开启，可参考下列教程进行操作
+
+操作过程涉及更改BIOS设置和更改磁盘分区样式，请始终仔细遵循主板制造商的官方说明。
+
 ------
 
 TPM和安全启动综合教程：
@@ -8,6 +12,8 @@ TPM和安全启动综合教程：
 [动视-TPM和安全启动（英文）](https://support.activision.com/cn/zh/articles/trusted-platform-module-and-secure-boot)
 
 [EA-如何在 PC 上启用安全启动](https://help.ea.com/zh/articles/technical-issues/secure-boot/#查看是否已启动安全启动)
+
+[微软的MBR转GPT教程](https://learn.microsoft.com/zh-cn/windows/deployment/mbr-to-gpt)
 
 特定主板厂商的教程：
 

@@ -1,3 +1,5 @@
+:: Copyright (c) 2025 德罗索（Deluxo_MKIII）
+:: Licensed under the MIT License. See LLCENSE file for more details.
 @echo off
 chcp 65001 >nul
 net session >nul 2>&1
@@ -6,7 +8,7 @@ if %errorLevel% neq 0 (
     powershell -Command "Start-Process cmd -ArgumentList '/c %~0' -Verb RunAs"
     exit /b
 )
-echo TPM和安全启动检测助手 BY HowlingBlood aka DELUXO_MKIII
+echo TPM和安全启动检测助手 BY HowlingBlood a.k.a. DELUXO_MKIII
 echo 正在检测...
 set "tpm_status=未开启"
 set "tpm_detail="
