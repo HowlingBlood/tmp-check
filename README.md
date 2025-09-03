@@ -9,7 +9,7 @@
 
 TPM和安全启动综合教程：
 
-[动视-TPM和安全启动（英文）](https://support.activision.com/cn/zh/articles/trusted-platform-module-and-secure-boot)
+[动视-TPM和安全启动](https://support.activision.com/cn/zh/articles/trusted-platform-module-and-secure-boot)
 
 [EA-如何在 PC 上启用安全启动](https://help.ea.com/zh/articles/technical-issues/secure-boot/#查看是否已启动安全启动)
 
