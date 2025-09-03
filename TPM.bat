@@ -17,6 +17,27 @@ for /f "tokens=*" %%a in ('powershell.exe -command Get-Tpm') do (
         )
     )
 )
+REM 检查UEFI启动
+set "uefi_status=未检测"
+for /f "tokens=*" %%a in ('powershell.exe -command "[System.Environment]::GetEnvironmentVariable('firmware_type')"') do (
+    echo %%a | findstr /i "UEFI" >nul && (
+        set "uefi_status=UEFI"
+    )
+)
+if "%uefi_status%"=="未检测" (
+    set "uefi_status=Legacy"
+)
+
+REM 检查系统磁盘是否为GPT
+set "gpt_status=未检测"
+for /f "tokens=*" %%a in ('powershell.exe -command "(Get-Disk | Where-Object IsSystem -eq $true).PartitionStyle"') do (
+    echo %%a | findstr /i "GPT" >nul && (
+        set "gpt_status=GPT"
+    )
+)
+if "%gpt_status%"=="未检测" (
+    set "gpt_status=MBR"
+)
 set "secure_boot_status=未开启"
 for /f "tokens=*" %%a in ('powershell.exe -command Confirm-SecureBootUEFI') do (
     echo %%a | findstr /i "True" >nul && (
@@ -27,11 +48,19 @@ echo 检测完成。
 
 echo TPM 状态: %tpm_status%
 echo Secure Boot 状态: %secure_boot_status%
+echo UEFI 启动: %uefi_status%
+echo 系统磁盘分区格式: %gpt_status%
 
 if "%tpm_status%"=="未开启" (
     set "show_warning=1"
 )
 if "%secure_boot_status%"=="未开启" (
+    set "show_warning=1"
+)
+if "%uefi_status%"=="Legacy" (
+    set "show_warning=1"
+)
+if "%gpt_status%"=="MBR" (
     set "show_warning=1"
 )
 
